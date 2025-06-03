@@ -1,8 +1,8 @@
-# nixos-config
+# nixos-confi# nixos-config
 
 This repository contains my personal NixOS configuration, built upon the
 [LGUG2Z/nixos-wsl-starter](https://github.com/LGUG2Z/nixos-wsl-starter) template,
-adapted for my needs to run a LazyVim powered
+adapted for my needs to run a **LazyVim** powered
 NixOS development environment on WSL.
 
 If you don't want to dig into NixOS too much right now, the only file you need
@@ -31,7 +31,7 @@ This configuration is a lightly-opinionated take on a productive terminal-driven
 development environment based on my own preferences. However, it is trivial to
 customize to your liking both by removing and adding tools that you prefer.
 
-- The default editor is [JeezyVim](https://github.com/LGUG2Z/JeezyVim)
+- The default editor is **LazyVim**
 - `win32yank` is used to ensure perfect bi-directional copying and pasting to
   and from Windows GUI applications and LunarVim running in WSL
 - The default shell is `fish`
