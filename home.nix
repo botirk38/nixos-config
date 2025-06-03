@@ -1,7 +1,6 @@
 {
   pkgs,
   username,
-  secrets,
   inputs,
   ...
 }:
@@ -52,6 +51,7 @@ let
     rust-analyzer
     poetry
     gitui
+    git-credential-manager
 
     # Language + LSPs
     nodePackages.vscode-langservers-extracted
@@ -175,14 +175,7 @@ in
       userEmail = "btrghstk@gmail.com";
       userName = "Botir Khaltaev";
       extraConfig = {
-        url = {
-          "https://oauth2:${secrets.github_token}@github.com" = {
-            insteadOf = "https://github.com";
-          };
-          "https://oauth2:${secrets.gitlab_token}@gitlab.com" = {
-            insteadOf = "https://gitlab.com";
-          };
-        };
+        # Removed the 'url' block that previously used 'secrets'
         push = {
           default = "current";
           autoSetupRemote = true;

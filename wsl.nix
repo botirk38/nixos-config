@@ -1,18 +1,18 @@
 {
-  secrets,
   username,
   hostname,
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   time.timeZone = "Europe/London";
 
   networking.hostName = "${hostname}";
 
   programs.fish.enable = true;
-  environment.pathsToLink = ["/share/fish"];
-  environment.shells = [pkgs.fish];
+  environment.pathsToLink = [ "/share/fish" ];
+  environment.shells = [ pkgs.fish ];
 
   environment.enableAllTerminfo = true;
 
@@ -81,11 +81,12 @@
 
   nix = {
     settings = {
-      trusted-users = [username];
-      access-tokens = [
-        "github.com=${secrets.github_token}"
-        "gitlab.com=OAuth2:${secrets.gitlab_token}"
-      ];
+      trusted-users = [ username ];
+      # Removed access-tokens due to secrets being removed from repo
+      # access-tokens = [
+      #   "github.com=${secrets.github_token}"
+      #   "gitlab.com=OAuth2:${secrets.gitlab_token}"
+      # ];
 
       accept-flake-config = true;
       auto-optimise-store = true;

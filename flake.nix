@@ -28,7 +28,7 @@
     inputs:
     with inputs;
     let
-      secrets = builtins.fromJSON (builtins.readFile "${self}/secrets.json");
+      # REMOVED: secrets = builtins.fromJSON (builtins.readFile "${self}/secrets.json");
 
       nixpkgsWithOverlays =
         system:
@@ -61,7 +61,7 @@
       };
 
       argDefaults = {
-        inherit secrets inputs self;
+        inherit inputs self; # REMOVED: 'secrets' from inherit
         channels = {
           inherit nixpkgs nixpkgs-unstable;
         };
