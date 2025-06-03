@@ -2,7 +2,7 @@
 
 This repository contains my personal NixOS configuration, built upon the
 [LGUG2Z/nixos-wsl-starter](https://github.com/LGUG2Z/nixos-wsl-starter) template,
-adapted for my needs to run a [JeezyVim](https://github.com/LGUG2Z/JeezyVim)-powered
+adapted for my needs to run a LazyVim powered
 NixOS development environment on WSL.
 
 If you don't want to dig into NixOS too much right now, the only file you need
