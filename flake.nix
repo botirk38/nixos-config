@@ -22,12 +22,17 @@
     # Command-not-found database
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    # SOPS Nix (for secrets management)
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs"; # Ensure it uses your stable nixpkgs
   };
 
   outputs =
     inputs:
     with inputs;
     let
+      # You no longer need `secrets` from a JSON file this way, sops-nix handles it
       # REMOVED: secrets = builtins.fromJSON (builtins.readFile "${self}/secrets.json");
 
       nixpkgsWithOverlays =
@@ -61,7 +66,7 @@
       };
 
       argDefaults = {
-        inherit inputs self; # REMOVED: 'secrets' from inherit
+        inherit inputs self;
         channels = {
           inherit nixpkgs nixpkgs-unstable;
         };
@@ -84,6 +89,7 @@
           modules = [
             (configurationDefaults specialArgs)
             home-manager.nixosModules.home-manager
+            sops-nix.nixosModules.sops
           ] ++ modules;
         };
     in

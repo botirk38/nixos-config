@@ -52,6 +52,8 @@ let
     poetry
     gitui
     git-credential-manager
+    sops
+    gnupg
 
     # Language + LSPs
     nodePackages.vscode-langservers-extracted
@@ -62,6 +64,7 @@ let
     ruff
     nil
     bun
+    opencommit
 
     # Linters / formatters
     alejandra
