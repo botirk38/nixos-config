@@ -61,6 +61,12 @@
     autoPrune.enable = true;
   };
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
+
   # sops-nix configuration
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml; # Define the path to your encrypted secrets file

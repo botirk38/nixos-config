@@ -54,6 +54,7 @@ let
     git-credential-manager
     sops
     gnupg
+    pinentry-curses
 
     # Language + LSPs
     nodePackages.vscode-langservers-extracted
