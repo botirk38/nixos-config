@@ -3,7 +3,7 @@
 
   inputs = {
     # Stable NixOS
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05"; # <--- Your primary Nixpkgs branch
 
     # Unstable channel for bleeding-edge packages
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -24,17 +24,14 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     # SOPS Nix (for secrets management)
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs"; # Ensure it uses your stable nixpkgs
+    sops-nix.url = "github:Mic92/sops-nix"; # <--- Changed back to main/master
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs"; # <--- IMPORTANT: Make it follow your primary nixpkgs
   };
 
   outputs =
     inputs:
     with inputs;
     let
-      # You no longer need `secrets` from a JSON file this way, sops-nix handles it
-      # REMOVED: secrets = builtins.fromJSON (builtins.readFile "${self}/secrets.json");
-
       nixpkgsWithOverlays =
         system:
         import nixpkgs rec {
@@ -89,7 +86,6 @@
           modules = [
             (configurationDefaults specialArgs)
             home-manager.nixosModules.home-manager
-            sops-nix.nixosModules.sops
           ] ++ modules;
         };
     in

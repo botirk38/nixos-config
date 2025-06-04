@@ -3,9 +3,15 @@
   hostname,
   pkgs,
   inputs,
+  self,
+  config,
   ...
 }:
 {
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+  ];
+
   time.timeZone = "Europe/London";
 
   networking.hostName = "${hostname}";
@@ -19,6 +25,28 @@
   security.sudo.wheelNeedsPassword = false;
 
   services.openssh.enable = true;
+
+  # SOPS configuration at system level
+  sops.defaultSopsFile = "${self}/secrets/secrets.yaml";
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+
+  sops.secrets.openai-api-key = {
+    owner = username;
+    group = "users";
+    mode = "0400";
+  };
+
+  # Create environment file with the secret
+  sops.templates."openai-env" = {
+    content = ''
+      export OPENAI_API_KEY="${config.sops.placeholder.openai-api-key}"
+    '';
+    path = "/etc/openai-env";
+    owner = username;
+    group = "users";
+    mode = "0400";
+  };
 
   users.users.${username} = {
     isNormalUser = true;
@@ -51,7 +79,6 @@
     defaultUser = username;
     startMenuLaunchers = true;
 
-    # Enable integration with Docker Desktop (needs to be installed)
     docker-desktop.enable = false;
   };
 
@@ -67,22 +94,9 @@
     pinentryPackage = pkgs.pinentry-curses;
   };
 
-  # sops-nix configuration
-  sops = {
-    defaultSopsFile = ./secrets/secrets.yaml; # Define the path to your encrypted secrets file
-
-    secrets."openai-api-key" = {
-      sopsFile = ./secrets/secrets.yaml;
-      mode = "0400"; # Recommended for secrets
-    };
-  };
-
   nix = {
     settings = {
       trusted-users = [ username ];
-      # access-tokens can still be useful if you need to fetch from private repos
-      # with a token that might also be a secret, managed by sops.
-      # For now, keep them commented out if not explicitly needed.
       # access-tokens = [
       #   "github.com=${secrets.github_token}"
       #   "gitlab.com=OAuth2:${secrets.gitlab_token}"

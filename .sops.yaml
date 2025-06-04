@@ -1,0 +1,23 @@
+# ~/configuration/.sops.yaml
+keys:
+  # Your personal age public key
+  - &user_age_key age1xz6fz7qx7y68wg0w76qv4p0ng9ntp4vlcpwjmxr9wwhftdg37d4qwf5eu2
+
+  # Machine's age public key (from ssh_host_ed25519_key.pub)
+  - &machine_age_key age1svmx4uzg7rq8gp6mxu9frve075qt850a7a7kga5730eyggu0p3aq93xxc3
+
+  # Optional: If you also want to use the RSA host key (via GPG) for decryption,
+  # add its fingerprint. (It's already in your logs: 43C0753461EDA3A1D2FAAB1B2EB659A458512939)
+  # If you're confident in age, you can skip this GPG recipient for simplicity.
+  # - &machine_rsa_gpg_fingerprint 43C0753461EDA3A1D2FAAB1B2EB659A458512939
+
+creation_rules:
+  # This regex covers secrets/secrets.yaml
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *user_age_key
+          - *machine_age_key
+        # If you added a GPG recipient above, uncomment this section:
+        # pgp:
+        # - *machine_rsa_gpg_fingerprint
