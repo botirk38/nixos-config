@@ -65,7 +65,7 @@
 
   home-manager.users.${username} = {
     imports = [
-      ./home.nix
+      ./home/home.nix
     ];
   };
 
