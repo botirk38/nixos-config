@@ -49,6 +49,9 @@ let
     sops
     gnupg
     pinentry-curses
+    prisma-engines
+    prisma
+    openssl
 
     # Language + LSPs
     nodePackages.vscode-langservers-extracted
@@ -60,6 +63,8 @@ let
     nil
     bun
     opencommit
+    biome
+    lua-language-server
 
     # Linters / formatters
     alejandra

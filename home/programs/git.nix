@@ -12,7 +12,10 @@
       };
     };
     userEmail = "btrghstk@gmail.com";
-    userName = "Botir Khaltaev";
+    userName = "botirk38";
+    extraConfig = {
+      credential.helper = "store";
+    };
     extraConfig = {
       push = {
         default = "current";
