@@ -52,6 +52,7 @@ let
     prisma-engines
     prisma
     openssl
+    lua51Packages.lua
 
     # Language + LSPs
     nodePackages.vscode-langservers-extracted
