@@ -53,6 +53,10 @@ let
     prisma
     openssl
     lua51Packages.lua
+    stdenv.cc.cc.lib
+    bfg-repo-cleaner
+    gnumake42
+    glibc
 
     # Language + LSPs
     nodePackages.vscode-langservers-extracted
