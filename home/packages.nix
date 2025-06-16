@@ -57,6 +57,7 @@ let
     bfg-repo-cleaner
     gnumake42
     glibc
+    zig
 
     # Language + LSPs
     nodePackages.vscode-langservers-extracted
