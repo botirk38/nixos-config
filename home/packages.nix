@@ -90,6 +90,14 @@ let
     nodejs_24
     neovim
 
+        # Core C/C++ build tools and libraries
+    gcc # Provides libstdc++.so.6
+    zlib
+    glibc
+    pkg-config # Often needed for C dependencies
+    zeromq # The C library
+    python3Packages.pyzmq # The Python bindings
+
     # Formatters and tools missing in conform.nvim / mason
     nixfmt-rfc-style
     sqlfluff

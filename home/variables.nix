@@ -11,6 +11,7 @@
       PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
       PRISMA_INTROSPECTION_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/introspection-engine";
       PRISMA_FMT_BINARY = "${pkgs.prisma-engines}/bin/prisma-fmt";
+      LD_LIBRARY_PATH="${pkgs.zeromq}/lib:$LD_LIBRARY_PATH";
     };
   };
 }
